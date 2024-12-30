@@ -6,12 +6,75 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model User {
-  id              String    @id @default(uuid())
-  username        String
-  email           String    @unique
-  password        String
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  id          String    @id @default(uuid())
+  username    String
+  email       String    @unique
+  password    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  document    Document[]
+  collaborator Collaborator[]
+  event       Event[]
+}
+
+model Document {
+  id            String      @id @default(uuid())
+  title         String
+  content       String      @default("")
+  ownerId       String
+  owner         User        @relation(fields: [ownerId], references: [id])
+  collaborators Collaborator[]
+  events        Event[]
+  version       Version[]
+  isLocked      Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  deletedAt     DateTime?
+}
+
+model Collaborator {
+  id          String   @id @default(uuid())
+  userId      String
+  documentId  String
+  role        CollaboratorRole @default(EDITOR)
+  user        User      @relation(fields: [userId], references: [id])
+  document    Document  @relation(fields: [documentId], references: [id])
+  joinedAt    DateTime  @default(now())
+}
+
+model Version {
+  id          String    @id @default(uuid())
+  documentId  String
+  content     String    // Snapshot
+  createdAt   DateTime  @default(now())
+  document    Document  @relation(fields: [documentId], references: [id])
+}
+
+model Event {
+  id          String    @id @default(uuid())
+  documentId  String
+  userId      String
+  type        EventType
+  row         Int?
+  column      Int?
+  payload     Json      // Details of the event (e.g., content changes, cursor positions)
+  index       Int       @default(autoincrement())
+  createdAt   DateTime  @default(now())
+
+  document    Document  @relation(fields: [documentId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+enum EventType {
+  EDIT
+  CURSOR_MOVE
+  COMMENT
+}
+
+enum CollaboratorRole {
+  VIEWER
+  EDITOR
+  OWNER
 }

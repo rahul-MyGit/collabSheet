@@ -1,0 +1,23 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:worker": "tsup && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*"
+  },
+  "dependencies": {
+    "@prisma/client": "5.19.1",
+    "@types/redis": "^4.0.11",
+    "redis": "^4.7.0",
+    "tsup": "^8.1.0"
+  }
+}

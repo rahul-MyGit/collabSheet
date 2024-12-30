@@ -3,11 +3,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/index.ts",
+    "start:cron": "ts-node src/lib/schedular.ts",
+    "clean": "ts-node src/lib/cleanup.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "5.19.1",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/node-cron": "^3.0.11",
+    "child_process": "^1.0.2"
+  }
 }

@@ -3,11 +3,28 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsup && node dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "5.19.1",
+    "@types/cookie": "^1.0.0",
+    "@types/dotenv": "^8.2.3",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/ws": "^8.5.13",
+    "cookie": "^1.0.2",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
+    "redis": "^4.7.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/redis": "^4.0.11",
+    "tsup": "^8.1.0"
+  }
 }
