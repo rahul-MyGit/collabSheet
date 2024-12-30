@@ -1,16 +1,16 @@
+import { getMe, logout, signin } from '@/controller/user.controller'
+import { signup } from '@/controller/user.controller'
+import protectRoute from '@/middleware'
 import { Router } from 'express'
-import prisma from '@/db/index'
+
 const router: Router = Router()
-router.get('/', async (req, res) => {
-  const users = await prisma.user.findMany()
-  res.status(200).json(users)
-})
-router.get('/:id', async (req, res) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id: req.params.id,
-    },
-  })
-  res.status(200).json(user)
-})
+
+router.get('/', protectRoute, getMe)
+
+router.post('/', signup)
+
+router.post('/', signin)
+
+router.post('/', logout)
+
 export default router
