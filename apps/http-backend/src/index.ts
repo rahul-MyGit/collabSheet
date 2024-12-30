@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import { userRoute } from '@/routes/index'
+import { sheetRoute, userRoute } from '@/routes/index'
 import cors from 'cors'
 import { ENV } from './config'
 
@@ -9,6 +9,7 @@ app.use(cors())
 
 
 app.use('/api/v1/user', userRoute);
+app.use('/api/v1/sheet', sheetRoute);
 
 app.get('/', (_req: Request, res: Response) => {
   res.status(200).json({
