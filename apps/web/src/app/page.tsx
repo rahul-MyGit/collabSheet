@@ -10,21 +10,21 @@ const page = () => {
       <div className="max-w-screen-lg w-full mx-auto h-full font-roboto grid grid-cols-2 pt-[10%]">
         <div>
           <h1 className="text-5xl font-bold text-primary capitalize tracking-[-.0325em] leading-[1.1]">
-            create <span className="uppercase">super</span> turbo
+            create <span className="uppercase">REALTIME</span> document
           </h1>
           <p className="text-lg text-foreground/70 leading-[28px] tracking-[-0.37px] font-medium my-2">
-            Kickstart your Next.js project in a flash with Create Super Turbo!
+            create a document and then other user can join that document as collaborator/editor in realtime
           </p>
           <ol className="font-mono list-decimal pl-8">
-            <li>Get started by editing src/app/page.tsx.</li>
-            <li>Save and see your changes instantly.</li>
+            <li>Get started by creating a new document</li>
+            <li>Paste that link to others, so they'll join as well</li>
           </ol>
           <div className="flex gap-4 my-4">
             <Button asChild>
-              <Link href="#">Start Building</Link>
+              <Link href={`/document`}>Start Building</Link>
             </Button>
             <Button asChild variant={'link'} className="gap-1">
-              <Link href="https://nextjs.org/" target="_blank">
+              <Link href="https://github.com/rahul-MyGit/collabSheet" target="_blank">
                 <Image
                   width={16}
                   height={16}
@@ -32,7 +32,7 @@ const page = () => {
                   alt="Globe"
                   className="h-4 dark:invert opacity-50 mr-1"
                 />
-                Go to nextjs.org
+                Go to Github code
                 <Image
                   width={16}
                   height={16}
@@ -54,7 +54,7 @@ function GithubStar() {
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      fetch('https://api.github.com/repos/ofcljaved/chess').then((res) =>
+      fetch('https://api.github.com/repos/rahul-MyGit/collabSheet').then((res) =>
         res.json(),
       ),
   })
@@ -68,7 +68,7 @@ function GithubStar() {
   return (
     <Button asChild variant={'outline'} className="gap-1 justify-self-end">
       <Link
-        href="https://github.com/super-turbo-stack/create-super-turbo"
+        href="https://github.com/rahul-MyGit/collabSheet"
         target="_blank"
       >
         <Image
