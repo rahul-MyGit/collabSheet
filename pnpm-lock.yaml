@@ -152,9 +152,15 @@ importers:
       '@prisma/client':
         specifier: 5.19.1
         version: 5.19.1(prisma@5.22.0)
+      '@types/dotenv':
+        specifier: ^8.2.3
+        version: 8.2.3
       '@types/redis':
         specifier: ^4.0.11
         version: 4.0.11
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.7
       redis:
         specifier: ^4.7.0
         version: 4.7.0

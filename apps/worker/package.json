@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@prisma/client": "5.19.1",
+    "@types/dotenv": "^8.2.3",
     "@types/redis": "^4.0.11",
+    "dotenv": "^16.4.5",
     "redis": "^4.7.0",
     "tsup": "^8.1.0"
   }

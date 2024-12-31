@@ -23,7 +23,7 @@ export const signup = async (req: Request, res: Response) => {
         });
 
         const token = jwt.sign({ userId: user.id }, ENV.JWT_SECRET);
-        res.cookie('auth_token', token, cookieConfig);
+        res.cookie('token', token, cookieConfig);
         res.json({ message: 'Signup successful' });
         return;
     } catch (error) {
@@ -43,7 +43,7 @@ export const signin = async (req: Request, res: Response) => {
         if (!validPassword) return ApiResponse(res, 401, false, 'Invalid credentials')
 
         const token = jwt.sign({ userId: user.id }, ENV.JWT_SECRET);
-        res.cookie('auth_token', token, cookieConfig);
+        res.cookie('token', token, cookieConfig);
         res.json({ message: 'Login successful' });
     } catch (error) {
         return ApiResponse(res, 400, false, 'Invalid input');
@@ -51,7 +51,7 @@ export const signin = async (req: Request, res: Response) => {
 }
 
 export const logout = (req: Request, res: Response) => {
-    res.clearCookie('auth_token');
+    res.clearCookie('token');
     res.json({ message: 'Logged out successfully' });
 }
 

@@ -13,7 +13,7 @@ const DocumentList = () => {
   const { data: documents, isLoading, error } = useQuery({
     queryKey: ['documents'],
     queryFn: async () => {
-      const response = await fetch('/api/v1/sheet', {
+      const response = await fetch('http://localhost:3000/api/v1/sheet', {
         credentials: 'include'
       });
       if (!response.ok) throw new Error('Failed to fetch documents');
@@ -23,7 +23,7 @@ const DocumentList = () => {
 
   const { mutate: createDocument } = useMutation({
     mutationFn: async (title: string) => {
-      const response = await fetch('/api/v1/sheet', {
+      const response = await fetch('http://localhost:3000/api/v1/sheet', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title }),
@@ -41,7 +41,7 @@ const DocumentList = () => {
 
   const { mutate: deleteDocument } = useMutation({
     mutationFn: async (id: string) => {
-      const response = await fetch(`/api/v1/sheet/${id}`, {
+      const response = await fetch(`http://localhost:3000/api/v1/sheet/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });

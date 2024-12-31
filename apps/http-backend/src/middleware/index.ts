@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { ENV } from "@/config";
 
 export default async function protectRoute(req: Request, res: Response, next: NextFunction) {
-    const token = req.cookies.auth_token;
+    const token = req.cookies.token;
   
   if (!token) return ApiResponse(res, 401, false, 'Not authenticated');
 
@@ -20,7 +20,7 @@ export default async function protectRoute(req: Request, res: Response, next: Ne
     req.userId = user.id;
     next();
   } catch (error) {
-    res.clearCookie('auth_token');
+    res.clearCookie('token');
     res.status(401).json({ error: 'Invalid token' });
   }
 }

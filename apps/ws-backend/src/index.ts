@@ -11,7 +11,17 @@ const connectedClients: Map<string, Set<WebSocket>> = new Map();
 async function startWebSocketServer() {
   await initializeRedis();
 
-  const wss = new WebSocketServer({ port: 8080 });
+  const wss = new WebSocketServer({ port: 8080, 
+    verifyClient: (info, callback) => {
+      const origin = info.origin;
+      const allowedOrigins = ['http://localhost:3001'];
+      if (allowedOrigins.includes(origin)) {
+        callback(true);
+      } else {
+        callback(false, 401, 'Unauthorized');
+      }
+    }
+  });
 
   wss.on('connection', async (ws, req) => {
     try {
@@ -23,7 +33,7 @@ async function startWebSocketServer() {
         return;
       }
 
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET || 'default_secret') as { userId: string };
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET || 'secret123') as { userId: string };
       const userId = decodedToken.userId;
 
       ws.on('message', async (message: string) => {
