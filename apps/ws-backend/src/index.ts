@@ -14,7 +14,7 @@ async function startWebSocketServer() {
   const wss = new WebSocketServer({ port: 8080, 
     verifyClient: (info, callback) => {
       const origin = info.origin;
-      const allowedOrigins = ['http://localhost:3001'];
+      const allowedOrigins = ['*'];
       if (allowedOrigins.includes(origin)) {
         callback(true);
       } else {
@@ -24,6 +24,8 @@ async function startWebSocketServer() {
   });
 
   wss.on('connection', async (ws, req) => {
+    console.log("hehe");
+    
     try {
       const cookies = parse(req.headers.cookie || '');
       const token = cookies['token'];
@@ -83,6 +85,7 @@ async function startWebSocketServer() {
       });
 
       ws.on('close', () => {
+        console.log("ho gya");
         connectedClients.forEach((clients, docId) => {
           clients.delete(ws);
           if (clients.size === 0) connectedClients.delete(docId);
