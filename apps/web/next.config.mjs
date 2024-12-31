@@ -3,6 +3,7 @@ const nextConfig = {
 
   reactStrictMode: true,
   transpilePackages: ["@repo/ui"],
+  output: 'standalone',
 
 };
 

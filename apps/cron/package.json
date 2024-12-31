@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "start:cron": "ts-node src/lib/schedular.ts",
-    "clean": "ts-node src/lib/cleanup.ts"
+    "clean": "ts-node src/lib/cleanup.ts",
+    "build": "tsc -b"
   },
   "keywords": [],
   "author": "",
