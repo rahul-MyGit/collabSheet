@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: turbo-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/rahul-MyGit/collabSheet'
+    targetRevision: main
+    path: k8s
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: turbo-test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

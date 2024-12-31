@@ -28,14 +28,13 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: rahuldocker2/turbo-test:${{ github.sha }}
+          tags: rahuldocker2/turbo-test:${{ github.sha }},rahuldocker2/turbo-test:latest
 
-      # - name: Deploy to Server
-      #   env:
-      #     DOCKER_HOST: ssh://bla@blabla
-      #     DOCKER_BUILDKIT: 1
-      #   run: |
-      #     docker pull rahuldocker2/turbo-test:${{ github.sha }}
-      #     docker stop web-app || true
-      #     docker rm web-app || true
-      #     docker run -d --name web-app --restart always rahuldocker2/turbo-test:${{ github.sha }}
+      - name: Update Kubernetes Manifests
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          sed -i "s|rahuldocker2/turbo-test:.*|rahuldocker2/turbo-test:${{ github.sha }}|" k8s/deployment.yaml
+          git add k8s/deployment.yaml
+          git commit -m "Update image to rahuldocker2/turbo-test:${{ github.sha }}"
+          git push

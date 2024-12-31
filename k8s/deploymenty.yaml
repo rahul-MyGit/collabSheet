@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: turbo-test
+  namespace: turbo-test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: turbo-test
+  template:
+    metadata:
+      labels:
+        app: turbo-test
+    spec:
+      containers:
+      - name: turbo-test
+        image: rahuldocker2/turbo-test:latest
+        ports:
+        - containerPort: 80
