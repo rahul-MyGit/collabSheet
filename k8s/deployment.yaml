@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: turbo-test
-        image: rahuldocker2/turbo-test:latest
+        image: rahuldocker2/turbo-test:a95e6522e81f859e7ac631f958fe5273f2518c10
         ports:
         - containerPort: 80
